@@ -14,8 +14,28 @@ def foo(x):
     ### TODO
    
 def longest_run(mylist, key):
+    i = 0
+    sum = 0
+    summax = 0
+    while i < len(mylist):
+        if key == mylist[i]:
+            sum = sum + 1
+            if sum > summax:
+                summax = sum
+                i = i + 1
+            else:
+                i = i + 1
+        else:
+            sum = 0
+            i = i + 1
+    return summax
+            
+            
+
+    
+        
     ### TODO
-    pass
+    
 
 
 class Result:
