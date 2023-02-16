@@ -52,6 +52,44 @@ class Result:
     
     
 def longest_run_recursive(mylist, key):
+    if len(mylist) == 1:
+        if mylist[0] == key:
+            return Result(1,1,1, True)
+        else:
+            return Result(0,0,0, False)
+    else:
+        right = mylist[len(mylist)//2:]
+        left = mylist[:len(mylist)//2]
+        r = longest_run_recursive(right,key)
+        l = longest_run_recursive(left,key)
+        
+        
+        if r.is_entire_range and l.is_entire_range:
+            summax = r.longest_size + l.longest_size
+            return Result(summax, summax, summax, True)
+        elif r.is_entire_range:
+            if r.longest_size >= (l.right_size + r.left_size):
+                summax = r.longest_size
+            else:
+                summax = l.right_size + r.left_size
+            return Result(l.left_size, r.right_size + l.right_size, summax, False)
+        elif l.is_entire_range:
+            if l.longest_size >= (l.right_size + r.left_size):
+                summax = l.longest_size
+            else:
+                summax = l.right_size + r.left_size
+            return Result(l.left_size + r.left_size, r.right_size, summax, False)
+        else:
+            if r.longest_size >= (l.right_size + r.left_size):
+                summax = r.longest_size
+            elif l.longest_size >= (l.right_size + r.left_size):
+                summax = r.longest_size
+            else:
+                summax = l.right_size + r.left_size
+            return Result(l.left_size, r.right_size, summax, False)
+            
+            
+       
     ### TODO
     pass
 
