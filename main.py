@@ -51,11 +51,11 @@ class Result:
               (self.longest_size, self.left_size, self.right_size, self.is_entire_range))
     
     
-def longest_run_recurisve_answer(mylist, key):
-    answer = longest_run_recursive(mylist, key)
+def longest_run_recurisve(mylist, key):
+    answer = longest_run_recursive_result(mylist, key)
     return answer.longest_size
     
-def longest_run_recursive(mylist, key):
+def longest_run_recursive_result(mylist, key):
     if len(mylist) == 1:
         if mylist[0] == key:
             return Result(1,1,1, True)
@@ -64,8 +64,8 @@ def longest_run_recursive(mylist, key):
     else:
         right = mylist[len(mylist)//2:]
         left = mylist[:len(mylist)//2]
-        r = longest_run_recursive(right,key)
-        l = longest_run_recursive(left,key)
+        r = longest_run_recursive_result(right,key)
+        l = longest_run_recursive_result(left,key)
         
         
         if r.is_entire_range and l.is_entire_range:
@@ -84,10 +84,10 @@ def longest_run_recursive(mylist, key):
                 summax = l.right_size + r.left_size
             return Result(l.left_size + r.left_size, r.right_size, summax, False)
         else:
-            if r.longest_size >= (l.right_size + r.left_size):
+            if r.longest_size > (l.right_size + r.left_size):
                 summax = r.longest_size
-            elif l.longest_size >= (l.right_size + r.left_size):
-                summax = r.longest_size
+            elif l.longest_size > (l.right_size + r.left_size):
+                summax = l.longest_size
             else:
                 summax = l.right_size + r.left_size
             return Result(l.left_size, r.right_size, summax, False)
