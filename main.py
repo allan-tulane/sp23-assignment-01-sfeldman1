@@ -51,6 +51,10 @@ class Result:
               (self.longest_size, self.left_size, self.right_size, self.is_entire_range))
     
     
+def longest_run_recurisve_answer(mylist, key):
+    answer = longest_run_recursive(mylist, key)
+    return answer.longest_size
+    
 def longest_run_recursive(mylist, key):
     if len(mylist) == 1:
         if mylist[0] == key:
