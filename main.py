@@ -72,16 +72,16 @@ def longest_run_recursive_result(mylist, key):
             summax = r.longest_size + l.longest_size
             return Result(summax, summax, summax, True)
         elif r.is_entire_range:
-            if r.longest_size >= (l.right_size + r.left_size):
+            if r.longest_size >= (l.right_size + r.longest_size):
                 summax = r.longest_size
             else:
-                summax = l.right_size + r.left_size
+                summax = l.right_size + r.longest_size
             return Result(l.left_size, r.right_size + l.right_size, summax, False)
         elif l.is_entire_range:
-            if l.longest_size >= (l.right_size + r.left_size):
+            if l.longest_size >= (l.longest_size + r.left_size):
                 summax = l.longest_size
             else:
-                summax = l.right_size + r.left_size
+                summax = l.longest_size + r.left_size
             return Result(l.left_size + r.left_size, r.right_size, summax, False)
         else:
             if r.longest_size > (l.right_size + r.left_size):
